@@ -1,0 +1,68 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+
+//gcd() function to calculate HCF or GCD of numerator or denominator
+double gcd(int a, int b)
+{
+if (b == 0)
+return a;
+return gcd(b, a % b);
+}
+
+//declaration and definition of rational class
+class rational
+{
+public:
+double num,denom;
+
+//default constructor in rational class
+rational()
+{
+num=1;
+denom=1;
+}
+
+//double argumented constructor in rational class
+rational(double d1,double d2)
+{
+num=d1;
+denom=d2;
+}
+
+//reduce() function to reduce numerator and denominator by HCF
+void reduce()
+{
+double g;
+g=gcd(num,denom);
+num/=g;
+denom/=g;
+cout<<"\nNumerator = "<<num<<"\nDenominator = "<<denom;
+}
+
+//<< operator overloading
+friend ostream &operator<<( ostream &output, const rational &r)
+{
+output << "Numerator = " <<r.num<< "\nDenominator = " <<r.denom;
+return output;
+}
+
+//>> operator overloading
+friend istream &operator>>( istream  &input, rational &r ) {
+input >>r.num>>r.denom;
+return input;
+}
+};
+
+//main() function to test rational class
+void main()
+{
+clrscr();
+rational r,r1(2,4),r3;
+r1.reduce();
+cout<<"\nEnter the value of object:";
+cin>>r3;
+cout<<"\nEnter object values are :"<<r3;
+getch();
+}
+
